@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,html,ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .food{
+            width: 500px;
+            height: 200px;
+            background-color: #666;
+            margin: 200px auto;
+            border: 1px solid #000;
+        }
+        .fdbox li{
+            width: 500px;
+            height: 100px;
+            font-size:30px;
+            text-align: center;
+            line-height: 100px;
+            color: #e9e9e9;            
+        }
+        span{
+            color: #e9e9e9;
+            display: block;
+            width: 100px;
+            height: 50px;
+            background-color: #666;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 30px auto 0;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+        .form{
+            width: 500px;
+            text-align: center; 
+        }
+        .form input{
+            outline: none;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="food">
+        <form class="form">
+            <input type="text" name="" id="" value="自助餐">
+            <input type="text" name="" id="" value="水煮鸡柳">
+            <input type="text" name="" id="" value="随便打">
+            <input type="text" name="" id="" value="瓦罐汤">
+            <input type="text" name="" id="" value="小碗菜">
+            <input type="text" name="" id="" value="四菜一汤1">
+            <input type="text" name="" id="" value="四菜一汤2">
+            <input type="text" name="" id="" value="四菜一汤3">
+            <input type="text" name="" id="" value="四菜一汤4">
+            <input type="text" name="" id="" value="吃面">           
+        </form>
+        <ul class="fdbox">
+            <li></li>
+        </ul>
+        <span id="sp">随机</span>
+    </div>
+    <script src="./jquery-1.12.2.min.js"></script>
+    <script>
+        window.onload = function(){
+        var foodList = []; 
+           var inputs = document.querySelectorAll('input');           
+           for (let i = 0; i < inputs.length; i++) {
+                foodList[i]=inputs[i].value
+                inputs[i].onkeyup = function(){
+                    var val = this.value;
+                    if(!val==""){
+                        foodList[i] = val;
+                    }
+                    
+               }               
+           }   
+           var len = foodList.length;                            
+            var rand= Math.floor(Math.random()*len);
+            var rand2;
+            var ff =foodList[rand] 
+            $('.fdbox li').html(ff);            
+            $('#sp').click(function(){
+                var dd;                
+                var timeId=setInterval(function(){
+                    rand= Math.floor(Math.random()*len);
+                    dd=foodList[rand]                     
+                    $('.fdbox li').html(dd);
+                },50);
+                rand2= Math.floor(Math.random()*2000+3000);
+                setTimeout(function(){
+                    clearInterval(timeId);
+                    // alert("亲,中午吃"+dd+"了!")
+                },rand2);
+            })        
+        }
+    </script>
+</body>
+</html>
